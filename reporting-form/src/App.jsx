@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, {useState} from 'react'
+import Compteur from './composants/compteur';
+import Post from './composants/post';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+    const [posts, setPosts] = useState([
+        {
+            id:1,
+            nom:"Michele",
+            description:"Voici un exemple de texte pour les likes",
+            liker:false
+        },
+        {
+            id:2,
+            nom:"Sergeo",
+            description:"Voici un exemple de texte pour les likes",
+            liker:false
+        },
+        {
+            id:3,
+            nom:"Andy",
+            description:"Voici un exemple de texte pour les likes",
+            liker:false
+        }
+    ]);
+    const liker =(data)=>{
+        const donnerCopier = [...posts];
+        const index = posts.indexOf(data);
+        donnerCopier[index] = { ...posts[index],
+            liker: !posts[index].liker
+        };
+        setPosts(donnerCopier);
+        console.log (donnerCopier);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    };
+    const nbreLike = posts.filter(p=>p.liker)
+    return (
+        <div>
+            <h2 style={{textAlign: 'center'}}>Les posts liker sont : {nbreLike.length}</h2>
+            {posts.map((p) =>(<Post data={p} key={p.id} liker = {liker}/>))}
+            {/* <Compteur age = {age}/> */}
+        </div>
+    )
 }
-
-export default App

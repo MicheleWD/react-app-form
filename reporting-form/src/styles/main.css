@@ -1,0 +1,25 @@
+*{
+    margin: auto;
+}
+
+.compteur{
+    display: flex;
+    width: 100px;
+    margin-top: 10px;
+    background-color: rgb(69, 2, 133);
+    padding: 15px;
+    color: white;
+}
+
+.post{
+    display: flex;
+    width: 500px;
+    margin-top: 10px;
+    background-color: rgb(69, 2, 133);
+    padding: 10px;
+    color: white;
+}
+
+.post.active{
+    background-color: rgb(192, 161, 121);
+}
